@@ -1,0 +1,268 @@
+/* static/css/style.css */
+
+/* --- Общие стили --- */
+body {
+    background-color: #f5f5f5; /* Светлый фон для страницы */
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.section {
+    flex: 1; /* Занимает все доступное пространство между хедером и футером */
+}
+
+.is-hidden {
+    display: none !important;
+}
+
+.has-pointer {
+    cursor: pointer;
+}
+
+/* --- Шапка --- */
+.navbar {
+    border-bottom: 1px solid #dbdbdb;
+}
+.navbar-item img {
+    max-height: 2rem; /* Ограничение высоты лого/аватара в шапке */
+}
+
+/* --- Страница авторизации --- */
+.auth-form {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Список чатов (im.html) --- */
+#chat-list a.is-active {
+    background-color: hsl(204, 86%, 53%); /* Bulma info color */
+    color: white;
+}
+#chat-list .chat-item-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+#chat-list .chat-item-info {
+    flex-grow: 1;
+    margin-left: 10px;
+    overflow: hidden; /* Обрезаем длинные имена/сообщения */
+}
+#chat-list .chat-name {
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#chat-list .last-message {
+    font-size: 0.9em;
+    color: #7a7a7a;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#chat-list .chat-avatar img {
+    width: 40px;
+    height: 40px;
+}
+
+
+/* --- Окно чата (chat.html) --- */
+.chat-container {
+    max-width: 800px; /* Или другая ширина */
+    margin: 0 auto;
+}
+
+.chat-messages {
+    height: 60vh;
+    overflow-y: auto;
+    display: flex;
+    background-color: white;
+    padding: 1rem;
+    border: 1px solid #dbdbdb;
+    flex-direction: column;
+}
+
+.message {
+    margin-bottom: 1rem;
+    display: flex;
+    max-width: 80%; /* Ширина блока сообщения */
+    background-color:transparent !important;
+    word-wrap: break-word; /* Перенос длинных слов */
+}
+
+
+.message-user { 
+    display: flex !important;
+    align-items: center !important;
+    /* flex-direction: row !important; */
+}
+
+.message-content {
+    padding: 0.75em 1em;
+    border-radius: 1.2em;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.message.sent {
+    align-self: flex-end; /* Сообщения текущего пользователя справа */
+    margin-left: auto; /* Прижимаем к правому краю */
+    flex-direction: row-reverse; /* Аватар справа */
+}
+
+.message.sent .message-content {
+    background-color: hsl(0deg 0% 32%); /* Цвет для своих сообщений */
+    color: white;
+}
+
+.message.received {
+    align-self: flex-start; /* Сообщения собеседника слева */
+     margin-right: auto;
+}
+
+.message.received .message-content {
+    background-color: #e5e5ea; /* Цвет для чужих сообщений */
+    color: black;
+}
+
+.message .message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin: 0 8px;
+    align-self: flex-end; /* Аватар внизу блока сообщения */
+}
+
+.message .message-author {
+    font-size: 0.8em;
+    color: grey;
+    margin-bottom: 0.2em;
+}
+
+.message.sent .message-author {
+     text-align: right;
+}
+
+.message .message-timestamp {
+     font-size: 0.75em;
+     color: #999;
+     margin-top: 0.3em;
+     text-align: inherit; /* Наследуем выравнивание от родителя */
+}
+.message.sent .message-timestamp {
+    text-align: right;
+}
+.message.received .message-timestamp {
+    text-align: left;
+}
+
+
+.chat-input {
+    margin-top: 1rem;
+}
+
+/* --- Карточка поста --- */
+.post-card .media-left {
+    margin-right: 0.75rem; /* Немного уменьшим отступ слева */
+}
+.post-card .post-image {
+    margin-top: 0.75rem;
+    max-width: 100%;
+    border-radius: 4px;
+}
+.post-card .level-item .icon {
+    vertical-align: middle; /* Выравнивание иконок */
+}
+.post-card .level-item span:not(.icon) {
+    font-size: 0.9em;
+    vertical-align: middle;
+}
+.like-button.has-text-danger .fa-heart {
+    font-weight: 900; /* Делаем сердечко жирным при лайке */
+}
+
+/* --- Профиль --- */
+.profile-header .image img {
+    border: 2px solid #dbdbdb; /* Рамка вокруг аватара */
+}
+
+/* --- Список друзей/подписок --- */
+.list-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #dbdbdb;
+}
+.list-item:last-child {
+    border-bottom: none;
+}
+.list-item:hover {
+    background-color: #f9f9f9;
+}
+.list-item .list-item-image {
+    margin-right: 1rem;
+}
+.list-item .list-item-content {
+    flex-grow: 1;
+}
+.list-item .list-item-controls {
+    margin-left: 1rem;
+}
+
+
+/* --- Модальное окно комментариев --- */
+#comments-modal-content {
+    min-height: 300px; /* Чтобы было место для комментариев */
+}
+.comment-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+}
+.comment-item:last-child {
+    border-bottom: none;
+}
+.comment-author {
+    font-weight: bold;
+    margin-right: 5px;
+}
+.comment-timestamp {
+    font-size: 0.8em;
+    color: grey;
+}
+.comment-content {
+    margin-top: 0.25rem;
+}
+
+/* --- Стили для плавающих уведомлений --- */
+#notification-area {
+    position: fixed; /* Фиксированное позиционирование относительно viewport */
+    top: 1rem; /* Отступ сверху (или navbar.offsetHeight + 1rem) */
+    left: 50%;
+    transform: translateX(-50%); /* Центрирование по горизонтали */
+    z-index: 1050; /* Выше большинства элементов (navbar обычно ~1030) */
+    width: auto; /* Ширина по содержимому */
+    max-width: 90%; /* Максимальная ширина */
+    pointer-events: none; /* Позволяет кликать сквозь контейнер */
+}
+
+#notification-area .notification {
+    pointer-events: auto; /* Позволяет кликать на само уведомление (и кнопку закрыть) */
+    margin-bottom: 0.75rem; /* Отступ между уведомлениями */
+    opacity: 0; /* Начальное состояние - прозрачное */
+    transition: opacity 0.4s ease-in-out; /* Анимация прозрачности */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Тень для выделения */
+    position: relative; /* Для кнопки "закрыть" */
+}
+
+#notification-area .notification.fade-in {
+    opacity: 1; /* Конечное состояние - видимое */
+}
+
+#notification-area .notification .delete {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}

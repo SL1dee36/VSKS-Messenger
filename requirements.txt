@@ -1,0 +1,9 @@
+fastapi[all]
+sqlalchemy
+python-dotenv
+passlib[bcrypt]
+python-jose[cryptography]
+alembic
+psycopg2-binary # Если используешь PostgreSQL
+jinja2 # Добавлено для шаблонов
+python-multipart # Добавлено для загрузки файлов (аватарки)
