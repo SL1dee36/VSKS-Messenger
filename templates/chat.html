@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Чат{% endblock %} {# JS потом добавит имя чата #}
+
+{% block content %}
+<div class="chat-container" data-chat-id="{{ chat_id }}">
+    <h1 class="title" id="chat-title">Загрузка чата...</h1> {# Имя чата и участники будут добавлены JS #}
+    <div class="subtitle" id="chat-participants"></div>
+
+    <div class="box chat-messages" id="message-list">
+        <!-- Сообщения будут загружены сюда -->
+        <div class="has-text-centered p-4">
+            <span class="icon is-medium"><i class="fas fa-spinner fa-spin"></i></span> Загрузка сообщений...
+        </div>
+    </div>
+
+    <div class="chat-input mt-4">
+        <form id="message-form">
+            <div class="field has-addons">
+                <div class="control is-expanded">
+                    <input class="input" type="text" id="message-input" placeholder="Введите сообщение..." required autocomplete="off">
+                </div>
+                <div class="control">
+                    <button class="button is-info" type="submit" id="send-button">
+                        <span class="icon"><i class="fas fa-paper-plane"></i></span>
+                    </button>
+                </div>
+                 <!-- Кнопка для добавления файлов (пока без функционала) -->
+                <!-- <div class="control">
+                    <button class="button" type="button" id="attach-file-button" title="Прикрепить файл">
+                        <span class="icon"><i class="fas fa-paperclip"></i></span>
+                    </button>
+                </div> -->
+            </div>
+            <div id="message-error" class="has-text-danger is-size-7 mt-1"></div>
+        </form>
+    </div>
+
+     <!-- Опционально: Добавление участников (для групповых чатов) -->
+    <div id="add-participant-section" class="mt-5 is-hidden">
+         <h2 class="subtitle is-6">Добавить участника</h2>
+        <div class="field has-addons">
+              <div class="control is-expanded">
+                <input id="add-participant-username" class="input is-small" type="text" placeholder="Имя пользователя">
+              </div>
+              <div class="control">
+                <button id="add-participant-btn" class="button is-link is-small">
+                  Добавить
+                </button>
+              </div>
+        </div>
+        <div id="add-participant-error" class="has-text-danger is-size-7 mt-1"></div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ request.url_for('static', path='/js/chat.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Мои чаты{% endblock %}
+
+{% block content %}
+<h1 class="title">Мои чаты</h1>
+
+<div class="columns">
+    <div class="column is-one-third">
+        <aside class="menu">
+            <p class="menu-label">
+                Чаты
+            </p>
+            <ul class="menu-list" id="chat-list">
+                <!-- Список чатов будет загружен сюда JS -->
+                <li><span class="icon"><i class="fas fa-spinner fa-spin"></i></span> Загрузка...</li>
+            </ul>
+             <p class="menu-label mt-4">
+                Создать новый чат
+            </p>
+             <div class="field has-addons">
+              <div class="control is-expanded">
+                <input id="new-group-name" class="input" type="text" placeholder="Название группового чата">
+              </div>
+              <div class="control">
+                <button id="create-group-btn" class="button is-info">
+                  Создать группу
+                </button>
+              </div>
+            </div>
+            <div id="create-chat-error" class="has-text-danger is-size-7 mt-1"></div>
+        </aside>
+    </div>
+    <div class="column">
+        <div id="chat-placeholder" class="has-text-centered mt-6">
+            <p class="is-size-4 has-text-grey-light">Выберите чат для начала общения</p>
+             <span class="icon is-large has-text-grey-lighter mt-4">
+                <i class="fas fa-comments fa-3x"></i>
+            </span>
+        </div>
+        <!-- Сюда можно будет встроить окно чата при выборе, либо переходить на /im/{chat_id} -->
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ request.url_for('static', path='/js/im.js') }}"></script>
+{% endblock %}

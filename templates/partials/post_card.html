@@ -1,0 +1,44 @@
+<div class="box post-card mb-4" data-post-id="${post.id}">
+    <article class="media">
+        <figure class="media-left">
+            <p class="image is-48x48">
+                <img class="is-rounded" src="${post.author.avatar_url || '/static/img/default_avatar.png'}" alt="Avatar">
+            </p>
+        </figure>
+        <div class="media-content">
+            <div class="content">
+                <p>
+                    <strong><a href="/profile/${post.author.username}">${post.author.nickname || post.author.username}</a></strong>
+                    <small class="has-text-grey">@${post.author.username} · <time datetime="${post.timestamp}">${ new Date(post.timestamp).toLocaleString('ru-RU', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'}) }</time></small>
+                    <br>
+                    ${post.content.replace(/\n/g, '<br>')} {# Заменяем переносы строк на <br> #}
+                </p>
+                {# <img src="${post.image_url}" alt="Post image" class="post-image"> #} {# Если есть картинка #}
+            </div>
+            <nav class="level is-mobile">
+                <div class="level-left">
+                    <a class="level-item like-button ${ post.is_liked_by_current_user ? 'has-text-danger' : 'has-text-grey' }" aria-label="like" title="Нравится">
+                        <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                        <span class="like-count ml-1">${post.likes_count}</span>
+                    </a>
+                    <a class="level-item comment-button has-text-grey" aria-label="comment" title="Комментарии">
+                        <span class="icon is-small"><i class="fas fa-comment"></i></span>
+                        <span class="comment-count ml-1">${post.comments?.length || 0}</span> {# Показываем кол-во комментов #}
+                    </a>
+                    {# <a class="level-item has-text-grey" aria-label="share" title="Поделиться">
+                        <span class="icon is-small"><i class="fas fa-share"></i></span>
+                    </a> #}
+                </div>
+                 <div class="level-right">
+                    ${ post.can_delete ? `
+                    <div class="level-item">
+                         <button class="button is-danger is-small is-outlined delete-post-button" title="Удалить пост">
+                            <span class="icon is-small"><i class="fas fa-trash"></i></span>
+                        </button>
+                    </div>
+                    ` : ''}
+                 </div>
+            </nav>
+        </div>
+    </article>
+</div>

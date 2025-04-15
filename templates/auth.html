@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}Авторизация / Регистрация{% endblock %}
+
+{% block content %}
+<div class="columns is-centered">
+    <div class="column is-half">
+        <div class="tabs is-centered is-boxed">
+            <ul id="auth-tabs">
+                <li data-tab="login" class="is-active"><a href="?tab=login">Вход</a></li>
+                <li data-tab="register"><a href="?tab=register">Регистрация</a></li>
+                <!-- <li data-tab="reset"><a href="?tab=reset">Забыли пароль?</a></li> -->
+            </ul>
+        </div>
+
+        <!-- Форма входа -->
+        <div id="login-form" class="box auth-form">
+            <h2 class="title is-4 has-text-centered">Вход</h2>
+            <form id="loginForm">
+                <div class="field">
+                    <label class="label" for="login-username">Имя пользователя</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="text" id="login-username" name="username" placeholder="Ваш логин" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="login-password">Пароль</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="password" id="login-password" name="password" placeholder="********" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- <div class="field">
+                    <a href="?tab=reset">Забыли пароль?</a>
+                </div> -->
+
+                <div class="field">
+                    <div class="control">
+                        <button type="submit" class="button is-primary is-fullwidth">Войти</button>
+                    </div>
+                </div>
+                <div id="login-error" class="has-text-danger mt-2"></div>
+            </form>
+        </div>
+
+        <!-- Форма регистрации -->
+        <div id="register-form" class="box auth-form is-hidden">
+             <h2 class="title is-4 has-text-centered">Регистрация</h2>
+            <form id="registerForm">
+                 <div class="field">
+                    <label class="label" for="register-username">Имя пользователя</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="text" id="register-username" name="username" placeholder="Придумайте логин" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </div>
+                     <p class="help">Только латинские буквы, цифры и _</p>
+                </div>
+
+                 <div class="field">
+                    <label class="label" for="register-email">Email</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="email" id="register-email" name="email" placeholder="your@email.com" required>
+                         <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="register-nickname">Псевдоним (необязательно)</label>
+                    <div class="control">
+                        <input class="input" type="text" id="register-nickname" name="nickname" placeholder="Как вас называть?">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="register-password">Пароль</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="password" id="register-password" name="password" placeholder="Придумайте пароль" required>
+                         <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </div>
+                </div>
+
+                 <div class="field">
+                    <label class="label" for="register-password-confirm">Подтвердите пароль</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="password" id="register-password-confirm" placeholder="Повторите пароль" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <button type="submit" class="button is-primary is-fullwidth">Зарегистрироваться</button>
+                    </div>
+                </div>
+                 <div id="register-error" class="has-text-danger mt-2"></div>
+            </form>
+        </div>
+
+         <!-- Форма сброса пароля (пока не активна) -->
+        <!-- <div id="reset-form" class="box auth-form is-hidden">
+             <h2 class="title is-4 has-text-centered">Сброс пароля</h2>
+             <form id="resetForm">
+                <div class="field">
+                    <label class="label" for="reset-email">Email</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="email" id="reset-email" name="email" placeholder="Ваш email для восстановления" required>
+                        <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
+                    </div>
+                </div>
+                 <div class="field">
+                    <div class="control">
+                        <button type="submit" class="button is-primary is-fullwidth">Отправить инструкцию</button>
+                    </div>
+                </div>
+                 <div id="reset-message" class="has-text-info mt-2"></div>
+                 <div id="reset-error" class="has-text-danger mt-2"></div>
+             </form>
+        </div> -->
+
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ request.url_for('static', path='/js/auth.js') }}"></script>
+{% endblock %}

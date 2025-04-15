@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Лента{% endblock %}
+
+{% block content %}
+<h1 class="title">Лента публикаций</h1>
+
+<!-- Форма создания поста -->
+<div class="box create-post-box mb-5">
+    <form id="create-post-form">
+        <div class="field">
+             <div class="control">
+                <textarea id="post-content-input" class="textarea" placeholder="Что у вас нового, {{ current_user.nickname or current_user.username }}?" rows="3" required></textarea>
+            </div>
+        </div>
+        <div class="field is-grouped is-grouped-right">
+             <!-- <div class="control">
+                <div class="file is-info">
+                    <label class="file-label">
+                        <input class="file-input" type="file" name="image" id="post-image-input" accept="image/*">
+                        <span class="file-cta">
+                            <span class="file-icon"><i class="fas fa-upload"></i></span>
+                            <span class="file-label">Фото</span>
+                        </span>
+                    </label>
+                </div>
+                <span id="post-image-filename" class="ml-2 is-size-7"></span>
+            </div> -->
+            <div class="control">
+                <button type="submit" class="button is-link" id="create-post-button">Опубликовать</button>
+            </div>
+        </div>
+         <div id="create-post-error" class="has-text-danger mt-2"></div>
+    </form>
+</div>
+
+<!-- Лента постов -->
+<div id="post-feed-container">
+    <!-- Посты будут загружены сюда -->
+    <div class="has-text-centered p-5">
+         <span class="icon is-large"><i class="fas fa-spinner fa-spin fa-2x"></i></span>
+         <p>Загрузка ленты...</p>
+    </div>
+</div>
+
+<!-- Модальное окно для комментариев (пример) -->
+<div class="modal" id="comments-modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Комментарии</p>
+      <button class="delete" aria-label="close" id="close-comments-modal"></button>
+    </header>
+    <section class="modal-card-body" id="comments-modal-content">
+      <!-- Комментарии загружаются сюда -->
+    </section>
+    <footer class="modal-card-foot">
+        <form id="add-comment-form" style="width: 100%;">
+            <input type="hidden" id="comment-modal-post-id">
+            <div class="field has-addons">
+                <div class="control is-expanded">
+                    <input class="input" type="text" id="comment-input" placeholder="Добавить комментарий..." required>
+                </div>
+                <div class="control">
+                    <button class="button is-info" type="submit">Отправить</button>
+                </div>
+            </div>
+            <div id="comment-error" class="has-text-danger is-size-7 mt-1"></div>
+        </form>
+    </footer>
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+{# Подключаем шаблон карточки поста как скрипт, чтобы JS мог его использовать #}
+<script type="text/template" id="post-card-template">
+    {% include 'partials/post_card.html' %}
+</script>
+<script src="{{ request.url_for('static', path='/js/feed.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Мой Мессенджер{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ request.url_for('static', path='/css/style.css') }}">
+</head>
+<body>
+    <!-- Контейнер для плавающих уведомлений -->
+    <div id="notification-area"></div>
+
+    {% include 'partials/header.html' %}
+
+    <section class="section">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </section>
+
+    <!-- <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Messenger App</strong> by You.
+        </p>
+      </div>
+    </footer> -->
+
+    <!-- Общий JS и специфичный для страницы -->
+    {% if current_user %}
+    <script>
+      // Передаем базовую информацию о пользователе в JS
+      window.currentUser = {
+        id: {{ current_user.id }},
+        username: "{{ current_user.username }}",
+        nickname: "{{ current_user.nickname or current_user.username }}",
+        avatar_url: "{{ current_user.avatar_url or '' }}",
+        is_admin: {{ 'true' if current_user.is_admin else 'false' }}
+      };
+    </script>
+    {% else %}
+    <script>window.currentUser = null;</script>
+    {% endif %}
+    <script src="{{ request.url_for('static', path='/js/script.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

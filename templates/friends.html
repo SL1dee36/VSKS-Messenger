@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Друзья{% endblock %}
+
+{% block content %}
+<h1 class="title">Друзья</h1>
+
+<div class="tabs is-boxed">
+    <ul>
+        <li class="is-active" data-tab="following-tab"><a>Подписки (<span id="following-count">0</span>)</a></li>
+        <li data-tab="followers-tab"><a>Подписчики (<span id="followers-count">0</span>)</a></li>
+    </ul>
+</div>
+
+<div id="following-tab-content" class="tab-content">
+    <h2 class="subtitle">Вы подписаны на:</h2>
+    <div id="following-list" class="list is-hoverable">
+        <!-- Список подписок загружается сюда -->
+         <div class="has-text-centered p-4">
+             <span class="icon"><i class="fas fa-spinner fa-spin"></i></span> Загрузка...
+        </div>
+    </div>
+</div>
+
+<div id="followers-tab-content" class="tab-content is-hidden">
+    <h2 class="subtitle">Ваши подписчики:</h2>
+    <div id="followers-list" class="list is-hoverable">
+        <!-- Список подписчиков загружается сюда -->
+         <div class="has-text-centered p-4">
+             <span class="icon"><i class="fas fa-spinner fa-spin"></i></span> Загрузка...
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ request.url_for('static', path='/js/friends.js') }}"></script>
+{% endblock %}
